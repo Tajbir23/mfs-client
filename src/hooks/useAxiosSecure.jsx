@@ -15,8 +15,9 @@ const useAxiosSecure = () => {
         async config => {
             setLoading(true)
             const token = localStorage.getItem('token')
+            console.log(token)
             if(token){
-                config.headers.common['Authorization'] = `Bearer ${token}`
+                config.headers['Authorization'] = `Bearer ${token}`
             }
             return config
         },
@@ -33,9 +34,11 @@ const useAxiosSecure = () => {
         },
         async error => {
             setLoading(false)
-            if(error.response.status === 401 || error.response.status === 403){
+            console.log(error)
+            if(error.response?.status === 401 || error.response?.status === 403){
                 logOut()
-                navigate('/login')
+                navigate("/login")
+                
             }
             return Promise.reject(error)
         }
