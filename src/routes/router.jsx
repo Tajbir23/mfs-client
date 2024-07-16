@@ -3,6 +3,7 @@ import Login from "../components/authentication/Login";
 import SignUp from "../components/authentication/SignUp";
 import AdminRoute from "./AdminRoute";
 import Dashboard from "../components/dashboard/dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <AdminRoute><Dashboard /></AdminRoute>
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>
     }
 ])
 

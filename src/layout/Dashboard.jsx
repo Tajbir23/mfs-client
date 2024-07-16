@@ -1,10 +1,17 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthContext';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const DashboardLayout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {user} = useContext(AuthContext)
+  const {user, logOut} = useContext(AuthContext)
+  const navigate = useNavigate()
 
+
+  const handleLogout = () => {
+    logOut()
+    navigate('/login')
+  }
   return (
     <div className="flex h-screen bg-gray-100">
       <aside className={`w-64 bg-white shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
@@ -12,7 +19,7 @@ const DashboardLayout = ({ children }) => {
           <ul>
             <li className="mb-2 hidden md:block">
               <h1 className="flex font-bold text-xl items-center p-2 hover:bg-gray-200 rounded-md">
-                {user?.balance} tk
+                Balance {user?.balance} tk
               </h1>
             </li>
             <li className="mb-2">
@@ -21,29 +28,29 @@ const DashboardLayout = ({ children }) => {
               </h1>
             </li>
             <li className="mb-2">
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <NavLink to='/dashboard' className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Transaction History
-              </a>
+              </NavLink>
             </li>
             <li className="mb-2">
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Send money
-              </a>
+              </button>
             </li>
             <li className="mb-2">
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Cash In
-              </a>
+              </button>
             </li>
             <li className="mb-2">
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Cash Out
-              </a>
+              </button>
             </li>
             <li className="mb-2">
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={handleLogout} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </nav>
