@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthContext";
 
 const SignUp = () => {
   const inputsRef = useRef([]);
   const [role, setRole] = useState("user")
+  const {setUser} = useContext(AuthContext);
+
   const navigate = useNavigate()
 
   const axiosPublic = useAxiosPublic()
@@ -41,6 +44,7 @@ const SignUp = () => {
     const data = await res.data
     if(data?.token){
         localStorage.setItem("token", data.token)
+        setUser(data)
         navigate("/dashboard")
     }
     console.log(data)
