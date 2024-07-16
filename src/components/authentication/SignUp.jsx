@@ -116,7 +116,8 @@ const SignUp = () => {
                   <input
                     type="number"
                     id={`code-${index + 1}`}
-                    maxLength="1"
+                    maxLength={1}
+                    pattern="[0-9]"
                     ref={(el) => (inputsRef.current[index] = el)}
                     className="block w-9 h-9 py-3 text-sm font-extrabold text-center ring rounded-lg focus:ring-primary-500 focus:border-primary-500 "
                     onKeyUp={(e) => focusNextInput(e, index)}
@@ -132,7 +133,7 @@ const SignUp = () => {
           <div>
             <button
               type="submit"
-              className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50"
+              className="w-full px-8 py-3 font-semibold rounded-md bg-violet-600 "
             >
               Register
             </button>

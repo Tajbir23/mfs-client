@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
+
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
     const axiosPublic = useAxiosPublic()
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
+    
 
 
     useEffect(() => {

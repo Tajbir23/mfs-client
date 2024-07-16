@@ -1,12 +1,15 @@
-import { useRef } from "react";
+import {  useContext, useRef } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthContext";
 
 const Login = () => {
   const inputsRef = useRef([]);
   const axiosPublic = useAxiosPublic()
   const navigate = useNavigate()
+  const {setUser} = useContext(AuthContext)
 
+  
   const focusNextInput = (e, index) => {
     if (e.target.value.length === 0 && index > 0) {
       inputsRef.current[index - 1].focus();
@@ -20,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log('click')
+    
     const pin = inputsRef.current.map((input) => input.value).join("");
     const text = e.target.text.value
     
@@ -35,6 +38,7 @@ const Login = () => {
       if(data?.token){
 
         localStorage.setItem("token", data.token)
+        setUser(data)
         navigate("/dashboard")
     }
     } catch (error) {
@@ -95,13 +99,14 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50"
+              className="w-full px-8 py-3 font-semibold rounded-md bg-violet-600 "
             >
               Login
             </button>
           </div>
         </div>
       </form>
+      <p>If you do not have account, <Link to='/signup' className="">SignUp here</Link></p>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import useAxiosSecure from "./useAxiosSecure";
 const useProtect = () => {
     const {setUser} = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
-    const {data, isLoading, error} = useQuery({
+    const {data, isLoading, error, refetch} = useQuery({
         queryKey: "protect",
         queryFn: async () => {
             const res = await axiosSecure.get("/auth")
@@ -15,6 +15,8 @@ const useProtect = () => {
             if(data?.role){
                 setUser(data)
                 return data
+            }else{
+                return null
             }
         }
     })
@@ -23,7 +25,7 @@ const useProtect = () => {
         console.log(error)
     }
 
-    return {data, isLoading}
+    return {data, isLoading, refetch}
 }
 
 export default useProtect;

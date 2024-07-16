@@ -12,7 +12,7 @@ const ProtectedRoute = ({children}) => {
         return <h1>Loading...</h1>
     }
 
-    if(data?.role && data?.status !== "block"){
+    if(data?.role && data?.status !== "block" && user){
         return children
     }
     return <Navigate to="/login" />

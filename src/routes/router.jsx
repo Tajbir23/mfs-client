@@ -4,6 +4,8 @@ import SignUp from "../components/authentication/SignUp";
 import AdminRoute from "./AdminRoute";
 import Dashboard from "../components/dashboard/dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import UserManage from "../components/dashboard/admin/UserManage";
+import Transaction from "../components/dashboard/Transaction";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +18,17 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <ProtectedRoute><Dashboard /></ProtectedRoute>
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
+        children: [
+            {
+                path: "/dashboard",
+                element: <Transaction />
+            },
+            {
+                path: "manage_user",
+                element: <AdminRoute><UserManage /></AdminRoute>
+            }
+        ]
     }
 ])
 

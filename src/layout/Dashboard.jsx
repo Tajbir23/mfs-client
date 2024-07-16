@@ -2,14 +2,20 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+
+// import useProtect from '../hooks/useProtect';
+
 const DashboardLayout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {user, logOut} = useContext(AuthContext)
+
+  // const {refetch} = useProtect()
   const navigate = useNavigate()
 
 
   const handleLogout = () => {
     logOut()
+    
     navigate('/login')
   }
   return (
@@ -47,6 +53,15 @@ const DashboardLayout = ({ children }) => {
                 Cash Out
               </button>
             </li>
+
+            
+            {user?.role === "admin" && <li className="mb-2">
+              <NavLink to='/dashboard/manage_user' className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+                User management
+              </NavLink>
+            </li>}
+
+
             <li className="mb-2">
               <button onClick={handleLogout} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Logout
