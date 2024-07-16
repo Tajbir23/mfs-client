@@ -1,7 +1,11 @@
 import { useRef } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const inputsRef = useRef([]);
+  const axiosPublic = useAxiosPublic()
+  const navigate = useNavigate()
 
   const focusNextInput = (e, index) => {
     if (e.target.value.length === 0 && index > 0) {
@@ -14,10 +18,28 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const code = inputsRef.current.map((input) => input.value).join("");
-    console.log(code);
+    console.log('click')
+    const pin = inputsRef.current.map((input) => input.value).join("");
+    const text = e.target.text.value
+    
+    const user =  {
+      text,
+      pin
+    }
+
+    try {
+      const res = await axiosPublic.post("/login", user)
+      const data = await res.data
+      if(data?.token){
+
+        localStorage.setItem("token", data.token)
+        navigate("/dashboard")
+    }
+    } catch (error) {
+      console.log(error)
+    }
   };
   return (
     <div className="flex flex-col h-screen m-auto justify-center max-w-md p-6 rounded-md sm:p-10 ">
@@ -35,13 +57,13 @@ const Login = () => {
       >
         <div className="space-y-4">
           <div>
-            <label htmlFor="email" className="block mb-2">
+            <label htmlFor="text" className="block mb-2">
               Email or phone
             </label>
             <input
-              type="email"
-              name="email"
-              id="email"
+              type="text"
+              name="text"
+              id="text"
               placeholder="Enter your email or phone"
               className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
             />
@@ -55,7 +77,7 @@ const Login = () => {
                     className="sr-only"
                   >{`Code ${index + 1}`}</label>
                   <input
-                    type="text"
+                    type="number"
                     id={`code-${index + 1}`}
                     maxLength="1"
                     ref={(el) => (inputsRef.current[index] = el)}

@@ -28,12 +28,17 @@ const AuthProvider = ({children}) => {
         }
     },[axiosPublic])
 
-    
+    const logOut = () => {
+        localStorage.removeItem('token')
+        setUser(null)
+        setLoading(false)
+    }
 
     const authInfo = {
         user,
         loading,
-        setLoading
+        setLoading,
+        logOut
     }
 
     return (

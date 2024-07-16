@@ -105,7 +105,7 @@ const SignUp = () => {
                     className="sr-only"
                   >{`Code ${index + 1}`}</label>
                   <input
-                    type="text"
+                    type="number"
                     id={`code-${index + 1}`}
                     maxLength="1"
                     ref={(el) => (inputsRef.current[index] = el)}
