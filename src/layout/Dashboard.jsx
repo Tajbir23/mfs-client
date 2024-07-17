@@ -3,13 +3,12 @@ import { AuthContext } from '../provider/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 
-// import useProtect from '../hooks/useProtect';
 
 const DashboardLayout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {user, logOut} = useContext(AuthContext)
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const {refetch} = useProtect()
   const navigate = useNavigate()
 
 
@@ -17,6 +16,11 @@ const DashboardLayout = ({ children }) => {
     logOut()
     
     navigate('/login')
+  }
+
+  const handleModal = (modal) => {
+    setIsOpen(modal)
+
   }
   return (
     <div className="flex h-screen bg-gray-100">
@@ -39,17 +43,17 @@ const DashboardLayout = ({ children }) => {
               </NavLink>
             </li>
             <li className="mb-2">
-              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('send')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Send money
               </button>
             </li>
             <li className="mb-2">
-              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('cashIn')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Cash In
               </button>
             </li>
             <li className="mb-2">
-              <button className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('cashOut')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Cash Out
               </button>
             </li>
@@ -86,6 +90,9 @@ const DashboardLayout = ({ children }) => {
           
           {children}
         </main>
+      </div>
+      <div>
+        
       </div>
     </div>
   );

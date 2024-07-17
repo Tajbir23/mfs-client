@@ -2,13 +2,14 @@ import { Navigate } from "react-router-dom"
 
 import { useContext } from "react"
 import { AuthContext } from "../provider/AuthContext"
+import Loading from "../components/Loading"
 
 const AdminRoute = ({children}) => {
 
     const {loading, user} = useContext(AuthContext)
 
     if( loading){
-        return <h1>Loading...</h1>
+        return <Loading />
     }
 
     if(user?.role!== "admin" || !user || user?.role!== "admin" ){

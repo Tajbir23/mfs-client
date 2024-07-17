@@ -6,8 +6,13 @@ import Dashboard from "../components/dashboard/dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import UserManage from "../components/dashboard/admin/UserManage";
 import Transaction from "../components/dashboard/Transaction";
+import Home from "../components/Home";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />
+    },
     {
         path: "/login",
         element: <Login />
