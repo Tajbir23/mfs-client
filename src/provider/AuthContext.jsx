@@ -17,6 +17,10 @@ const AuthProvider = ({children}) => {
                 axiosPublic.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
                 const res = await axiosPublic.get('/auth');
                 console.log(res.data)
+                if(res.data.status === "block"){
+                    logOut()
+                    return
+                }
                 setUser(res.data)
                 setLoading(false)
             } catch (error) {

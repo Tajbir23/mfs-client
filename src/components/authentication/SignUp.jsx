@@ -43,11 +43,15 @@ const SignUp = () => {
 
     const res = await axiosPublic.post("/signup", user)
     const data = await res.data
-    if(data?.token){
-        localStorage.setItem("token", data.token)
-        setUser(data)
-        toast.success("Account created successfully")
-        navigate("/dashboard")
+    // if(data?.token){
+    //     localStorage.setItem("token", data.token)
+    //     setUser(data)
+    //     toast.success("Account created successfully")
+    //     navigate("/dashboard")
+    // }
+    if(data){
+      toast.success(data?.message)
+      navigate("/login")
     }
     if(data?.error){
         alert(data.error)
@@ -77,6 +81,7 @@ const SignUp = () => {
               type="text"
               name="name"
               id="name"
+              required
               placeholder="Enter your name"
               className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
             />
@@ -89,6 +94,7 @@ const SignUp = () => {
               type="email"
               name="email"
               id="email"
+              required
               placeholder="leroy@jenkins.com"
               className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
             />
@@ -101,6 +107,7 @@ const SignUp = () => {
               type="number"
               name="phone"
               id="phone"
+              required
               placeholder="Enter your phone number"
               className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
             />

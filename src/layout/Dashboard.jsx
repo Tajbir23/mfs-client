@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CashIn from '../components/dashboard/TransactionModal/CashIn';
 
 
 
@@ -23,7 +25,7 @@ const DashboardLayout = ({ children }) => {
 
   }
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-300">
       <aside className={`w-64 bg-white shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
@@ -92,10 +94,14 @@ const DashboardLayout = ({ children }) => {
         </main>
       </div>
       <div>
-        
+        {isOpen === "cashIn" && <CashIn user={user} handleModal={handleModal} />}
       </div>
     </div>
   );
+};
+
+DashboardLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default DashboardLayout;

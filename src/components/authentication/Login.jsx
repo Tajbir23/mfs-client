@@ -2,6 +2,7 @@ import {  useContext, useRef } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const inputsRef = useRef([]);
@@ -40,9 +41,11 @@ const Login = () => {
         localStorage.setItem("token", data.token)
         setUser(data)
         navigate("/dashboard")
+        toast.success("Logged in successfully")
     }
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.error)
+      toast.error(error.response.data.error)
     }
   };
   return (
@@ -106,7 +109,7 @@ const Login = () => {
           </div>
         </div>
       </form>
-      <p>If you do not have account, <Link to='/signup' className="">SignUp here</Link></p>
+      <p>If you do not have account, <Link to='/signup' className="text-blue-600 underline">SignUp here</Link></p>
     </div>
   );
 };
