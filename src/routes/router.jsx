@@ -7,6 +7,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import UserManage from "../components/dashboard/admin/UserManage";
 import Transaction from "../components/dashboard/Transaction";
 import Home from "../components/Home";
+import ManageTransaction from "../components/dashboard/agent/ManageTransaction"
+import AgentRoute from "./AgentRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "manage_user",
                 element: <AdminRoute><UserManage /></AdminRoute>
+            },
+            {
+                path: "manage_transactions",
+                element: <AgentRoute><ManageTransaction /></AgentRoute>
             }
         ]
     }

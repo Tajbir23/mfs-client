@@ -25,7 +25,7 @@ const useProtect = () => {
         console.log(error)
     }
 
-    return {data, isLoading, refetch}
+    return {data, isLoading, refetch, error}
 }
 
 export default useProtect;

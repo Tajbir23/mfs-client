@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
 
   }
   return (
-    <div className="flex h-screen bg-gray-300">
+    <div className="flex h-screen bg-gray-300 overflow-hidden">
       <aside className={`w-64 bg-white shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
@@ -39,12 +39,13 @@ const DashboardLayout = ({ children }) => {
                 {user?.name} {`(${user?.role})`}
               </h1>
             </li>
-            <li className="mb-2">
+            {user.role === "user" || user.role === "agent" &&<li className="mb-2">
               <NavLink to='/dashboard' className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Transaction History
               </NavLink>
-            </li>
-            <li className="mb-2">
+            </li>}
+            {user.role === "user" &&<>
+              <li className="mb-2">
               <button onClick={() => handleModal('send')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 Send money
               </button>
@@ -59,6 +60,7 @@ const DashboardLayout = ({ children }) => {
                 Cash Out
               </button>
             </li>
+            </>}
 
             
             {user?.role === "admin" && <li className="mb-2">
@@ -67,6 +69,11 @@ const DashboardLayout = ({ children }) => {
               </NavLink>
             </li>}
 
+              {user?.role === "agent" && <li className='mb-2'>
+                <NavLink to="/dashboard/manage_transactions" className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+                Transaction management
+              </NavLink>
+              </li>}
 
             <li className="mb-2">
               <button onClick={handleLogout} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
@@ -88,13 +95,13 @@ const DashboardLayout = ({ children }) => {
           </button>
           <h1 className="text-xl font-semibold">{user?.balance}Tk</h1>
         </header>
-        <main className="flex-1 p-4">
+        <main className="flex-1 p-4  overflow-auto">
           
           {children}
         </main>
       </div>
       <div>
-        {isOpen === "cashIn" && <CashIn user={user} handleModal={handleModal} />}
+        {isOpen === "cashIn" && <CashIn handleModal={handleModal} />}
       </div>
     </div>
   );

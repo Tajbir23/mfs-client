@@ -41,7 +41,8 @@ const SignUp = () => {
     }
 
 
-    const res = await axiosPublic.post("/signup", user)
+    try {
+      const res = await axiosPublic.post("/signup", user)
     const data = await res.data
     // if(data?.token){
     //     localStorage.setItem("token", data.token)
@@ -53,9 +54,9 @@ const SignUp = () => {
       toast.success(data?.message)
       navigate("/login")
     }
-    if(data?.error){
-        alert(data.error)
-        toast.error(data.error)
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.error)
     }
   };
   return (
