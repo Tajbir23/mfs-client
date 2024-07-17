@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import useProtect from "../hooks/useProtect"
 import Loading from "./Loading"
 
@@ -13,14 +13,14 @@ const Home = () => {
         return <Loading />
     }
     if(!token || error){
-        return <NavLink to="/login" />
+        return <Navigate to="/login" />
     }
     if(data.role){
         console.log(data.role)
         return navigate("/dashboard")
         // return <NavLink to="/dashboard" />
     }
-        return <NavLink to="/login" />
+        return <Navigate to="/login" />
     
 }
 

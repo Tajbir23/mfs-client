@@ -106,6 +106,7 @@ const ManageTransaction = () => {
 
   return (
     <div>
+      <h1 className="font-bold text-2xl mb-5">Manage Transaction</h1>
       <Table dataSource={data} columns={columns} />
     </div>
   )

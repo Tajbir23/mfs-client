@@ -27,58 +27,60 @@ const DashboardLayout = ({ children }) => {
 
   }
   return (
-    <div className="flex h-screen bg-gray-300 overflow-hidden">
-      <aside className={`w-64 bg-white shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
+    <div className="flex h-screen bg-emerald-100 overflow-hidden">
+      <aside className={`w-64 bg-emerald-300  shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
-            <li className="mb-2 hidden md:block">
-              <h1 className="flex font-bold text-xl items-center p-2 hover:bg-gray-200 rounded-md">
-                Balance {user?.balance} tk
-              </h1>
-            </li>
-            <li className="mb-2">
+            <li className="mb-2 md:hidden">
               <h1 className="flex text-xl font-bold items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
                 {user?.name} {`(${user?.role})`}
               </h1>
             </li>
-            {user.role === "user" || user.role === "agent" &&<li className="mb-2">
-              <NavLink to='/dashboard' className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+            {(user.role === "user" || user.role === "agent") &&<li className="mb-2">
+              <NavLink to='/dashboard' className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 Transaction History
               </NavLink>
             </li>}
             {user.role === "user" &&<>
               <li className="mb-2">
-              <button onClick={() => handleModal('send')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('send')} className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 Send money
               </button>
             </li>
             <li className="mb-2">
-              <button onClick={() => handleModal('cashIn')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('cashIn')} className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 Cash In
               </button>
             </li>
             <li className="mb-2">
-              <button onClick={() => handleModal('cashOut')} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={() => handleModal('cashOut')} className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 Cash Out
               </button>
             </li>
             </>}
 
             
-            {user?.role === "admin" && <li className="mb-2">
-              <NavLink to='/dashboard/manage_user' className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+            {user?.role === "admin" && <>
+              <li className="mb-2">
+              <NavLink to='/dashboard/manage_user' className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 User management
               </NavLink>
-            </li>}
+            </li>
+              <li className="mb-2">
+              <NavLink to='/dashboard/system_monitoring' className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
+                System Monitor
+              </NavLink>
+            </li>
+            </>}
 
               {user?.role === "agent" && <li className='mb-2'>
-                <NavLink to="/dashboard/manage_transactions" className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+                <NavLink to="/dashboard/manage_transactions" className=" w-full flex items-center p-2 font-semibold hover:bg-gray-200 rounded-md">
                 Transaction management
               </NavLink>
               </li>}
 
             <li className="mb-2">
-              <button onClick={handleLogout} className=" w-full flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded-md">
+              <button onClick={handleLogout} className=" w-full flex items-center p-2 font-bold hover:bg-gray-200 rounded-md">
                 Logout
               </button>
             </li>
@@ -97,9 +99,14 @@ const DashboardLayout = ({ children }) => {
           </button>
           <h1 className="text-xl font-semibold">{user?.balance}Tk</h1>
         </header>
-        <main className="flex-1 p-4  overflow-auto">
-          
-          {children}
+        <main >
+          <div className='md:flex hidden justify-between items-center bg-emerald-200 w-full p-4'>
+            <h1 className="text-2xl font-semibold ">{user?.name} {`(${user?.role})`}</h1>
+            <h1 className="text-2xl font-semibold ">{user?.balance}tk</h1>
+          </div>
+          <div className='className="flex-1 p-4  overflow-auto"'>
+            {children}
+          </div>
         </main>
       </div>
       <div>
