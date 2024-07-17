@@ -1,13 +1,12 @@
-import { useContext, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../provider/AuthContext";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
   const inputsRef = useRef([]);
   const [role, setRole] = useState("user")
-  const {setUser} = useContext(AuthContext);
+
 
   const navigate = useNavigate()
 
@@ -114,7 +113,8 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
+          <p>Enter 5 digit pin</p>
+            <div className="flex mt-2 space-x-2 rtl:space-x-reverse">
               {[...Array(5)].map((_, index) => (
                 <div key={index}>
                   <label
@@ -134,7 +134,7 @@ const SignUp = () => {
                 </div>
               ))}
             </div>
-            <p>Enter 5 digit pin</p>
+            
           </div>
         </div>
         <div>
@@ -148,8 +148,8 @@ const SignUp = () => {
           </div>
         </div>
       </form>
-      {role === "user" && <h1 className="text-green-700 cursor-pointer" onClick={() => setRole('agent')}>Register as agent</h1>}
-      {role === "agent" && <h1 className="text-green-700 cursor-pointer" onClick={() => setRole('user')}>Register as User</h1>}
+      {role === "user" && <h1 className="text-blue-600 underline cursor-pointer" onClick={() => setRole('agent')}>Register as agent</h1>}
+      {role === "agent" && <h1 className="text-blue-600 underline cursor-pointer" onClick={() => setRole('user')}>Register as User</h1>}
     </div>
   );
 };

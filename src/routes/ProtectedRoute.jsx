@@ -16,6 +16,7 @@ const ProtectedRoute = ({children}) => {
     if(data?.role && data?.status !== "block" && user){
         return children
     }
+    
     return <Navigate to="/login" />
 }
 

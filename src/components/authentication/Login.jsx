@@ -76,7 +76,8 @@ const Login = () => {
             />
           </div>
           <div>
-            <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
+          <p className="text-sm">Enter 5 digit pin</p>
+            <div className="flex mt-2 space-x-2 rtl:space-x-reverse">
               {[...Array(5)].map((_, index) => (
                 <div key={index}>
                   <label
@@ -95,7 +96,7 @@ const Login = () => {
                 </div>
               ))}
             </div>
-            <p className="text-sm">Enter 5 digit pin</p>
+            
           </div>
         </div>
         <div>
