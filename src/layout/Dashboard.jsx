@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CashIn from '../components/dashboard/TransactionModal/CashIn';
+import CashOut from '../components/dashboard/TransactionModal/CashOut';
 
 
 
@@ -102,6 +103,7 @@ const DashboardLayout = ({ children }) => {
       </div>
       <div>
         {isOpen === "cashIn" && <CashIn handleModal={handleModal} />}
+        {isOpen === "cashOut" && <CashOut handleModal={handleModal} />}
       </div>
     </div>
   );

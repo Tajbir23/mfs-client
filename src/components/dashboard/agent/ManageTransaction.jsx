@@ -31,7 +31,7 @@ const ManageTransaction = () => {
     const handleTransaction = async(record, status) => {
       console.log(record,status)
       try {
-        const res = await axiosSecure.post("/manage_cash_in_request", {status, id: record._id, userEmail: record.requestEmail, userPhone: record.requestPhone,  amount: record.amount})
+        const res = await axiosSecure.post("/manage_cash_in_request", {status, id: record._id, userEmail: record.requestEmail, userPhone: record.requestPhone,  amount: record.amount, type: record.type})
         const result = await res.data
         console.log(result)
         if(result?.message){
@@ -48,6 +48,18 @@ const ManageTransaction = () => {
 
     const columns = [
       {
+        title: "Type",
+        dataIndex: "type",
+        key: "type",
+        render: (text, record) => {
+          if(record.type === "cash_in"){
+            return <span className="text-green-600">Cash In</span>
+          }else{
+            return <span className="text-red-600">Cash Out</span>
+          }
+        }
+      },
+      {
         title: "Name",
         dataIndex: "requestName",
         key: "requestName",
@@ -61,6 +73,11 @@ const ManageTransaction = () => {
         title: "Amount",
         dataIndex: "amount",
         key: "amount",
+      },
+      {
+        title: "Deducted",
+        dataIndex: "deducted",
+        key: "deducted",
       },
       {
         title: "Status",
