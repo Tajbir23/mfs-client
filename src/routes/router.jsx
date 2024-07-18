@@ -9,6 +9,7 @@ import Transaction from "../components/dashboard/Transaction";
 import Home from "../components/Home";
 import ManageTransaction from "../components/dashboard/agent/ManageTransaction"
 import AgentRoute from "./AgentRoute";
+import SystemMonitor from "../components/dashboard/admin/SystemMonitor";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: "manage_transactions",
                 element: <AgentRoute><ManageTransaction /></AgentRoute>
+            },
+            {
+                path: 'system_monitoring',
+                element: <AdminRoute><SystemMonitor /></AdminRoute>
             }
         ]
     }

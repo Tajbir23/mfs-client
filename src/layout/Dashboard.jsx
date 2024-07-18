@@ -104,7 +104,7 @@ const DashboardLayout = ({ children }) => {
             <h1 className="text-2xl font-semibold ">{user?.name} {`(${user?.role})`}</h1>
             <h1 className="text-2xl font-semibold ">{user?.balance}tk</h1>
           </div>
-          <div className='className="flex-1 p-4  overflow-auto"'>
+          <div className="flex-1 p-4  overflow-auto">
             {children}
           </div>
         </main>

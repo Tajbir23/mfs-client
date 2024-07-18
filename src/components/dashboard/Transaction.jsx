@@ -68,7 +68,7 @@ const Transaction = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Transaction History</h1>
+      <h1 className="text-2xl font-bold mb-5">Transaction History</h1>
       <Table dataSource={data} columns={columns} />
     </div>
   )
