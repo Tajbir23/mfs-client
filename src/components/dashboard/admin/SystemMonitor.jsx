@@ -1,16 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../Loading";
 import { Line, LineChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useState } from "react";
+
+
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 const SystemMonitor = () => {
+  // const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
-  const { data, isLoading, isError } = useQuery({
+  const [data, setData] = useState(null)
+  const { data: systemMonitor, isLoading, isError } = useQuery({
     queryKey: "systemMonitor",
     queryFn: async () => {
       axiosPublic.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
       const res = await axiosPublic.get("/system_monitoring");
       const result = res.data;
+      setData(result)
       return result;
     }
   });
@@ -18,21 +26,26 @@ const SystemMonitor = () => {
   if (isLoading) return <Loading />;
   if (isError) return console.log(isError);
 
+  socket.on('system_monitoring_update', async(update) => {
+    setData(update)
+    // queryClient.invalidateQueries("systemMonitor")
+  })
+
   const info = [
     
-    { name: 'Total Users', value: data.totalUser },
-    { name: 'Total Agents', value: data.totalAgent },
-    { name: 'Total Transactions', value: data.totalTransaction },
-    { name: 'Total Cash In', value: data.totalCashIn },
-    { name: 'Total Cash Out', value: data.totalCashOut },
-    { name: 'Total Send Money', value: data.totalSendMoney },
-    { name: 'Total Cash In Request', value: data.totalCashInRequest },
-    { name: 'Total Cash Out Request', value: data.totalCashOutRequest },
-    { name: 'Total Cash In Accept', value: data.totalCashInAccept },
-    { name: 'Total Cash In Reject', value: data.totalCashInReject },
-    { name: 'Total Cash Out Reject', value: data.totalCashOutReject },
-    { name: 'Total Cash Out Success', value: data.totalCashOutSuccess },
-    { name: 'Total Send Money Success', value: data.totalSendMoneySuccess },
+    { name: 'Total Users', value: data?.totalUser },
+    { name: 'Total Agents', value: data?.totalAgent },
+    { name: 'Total Transactions', value: data?.totalTransaction },
+    { name: 'Total Cash In', value: data?.totalCashIn },
+    { name: 'Total Cash Out', value: data?.totalCashOut },
+    { name: 'Total Send Money', value: data?.totalSendMoney },
+    { name: 'Total Cash In Request', value: data?.totalCashInRequest },
+    { name: 'Total Cash Out Request', value: data?.totalCashOutRequest },
+    { name: 'Total Cash In Accept', value: data?.totalCashInAccept },
+    { name: 'Total Cash In Reject', value: data?.totalCashInReject },
+    { name: 'Total Cash Out Reject', value: data?.totalCashOutReject },
+    { name: 'Total Cash Out Success', value: data?.totalCashOutSuccess },
+    { name: 'Total Send Money Success', value: data?.totalSendMoneySuccess },
     
   ];
 

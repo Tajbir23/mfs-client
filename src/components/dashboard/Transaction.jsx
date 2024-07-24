@@ -4,16 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../Loading";
 import { Table } from "antd";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useState } from "react";
 
 
 const Transaction = () => {
   const axiosPublic = useAxiosPublic()
+  const [role, setRole] = useState('')
   const {data, isLoading, isError} = useQuery({
     queryKey: 'transaction',
     queryFn: async() => {
       axiosPublic.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
       const result = await axiosPublic.get('/transaction')
-      const transaction = result.data;
+      const transaction = result.data.result;
+      setRole(result.data.role)
       return transaction
     }
   })
@@ -53,6 +56,11 @@ const Transaction = () => {
       title: 'Receiver',
       dataIndex:'receiver',
       key:'receiver',
+      render: (text, record) => {
+        if(role === "agent"){
+          return "data"
+        }
+      }
     },
     {
       title: 'Status',
