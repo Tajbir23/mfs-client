@@ -121,7 +121,7 @@ const Transaction = () => {
   };
 
   return (
-    <div  className="overflow-hidden">
+    <div  className="w-full">
       <h1 className="text-2xl font-bold mb-5">Transaction History</h1>
       <Table ref={printRef} dataSource={data} columns={columns} pagination={false} />
       <Button onClick={() => handlePrint()}>Print History</Button>

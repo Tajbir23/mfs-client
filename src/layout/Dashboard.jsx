@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }) => {
   }
   return (
     <div className="flex h-full w-full bg-emerald-100">
-      <aside className={`w-64 bg-emerald-300  shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
+      <aside className={`w-64 bg-emerald-300  shadow-md ${isMenuOpen ? 'block fixed z-30 pt-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
             <li className="mb-2 md:hidden">
@@ -88,7 +88,7 @@ const DashboardLayout = ({ children }) => {
         </nav>
       </aside>
       <div className="flex-1 flex flex-col">
-        <header className="flex items-center justify-between bg-white p-4 shadow-md md:hidden z-30">
+        <header className="flex items-center justify-between bg-white p-4 shadow-md md:hidden z-30 fixed w-full">
           <button
             className="text-gray-500 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -104,7 +104,7 @@ const DashboardLayout = ({ children }) => {
             <h1 className="text-2xl font-semibold ">{user?.name} {`(${user?.role})`}</h1>
             <h1 className="text-2xl font-semibold ">{user?.balance}tk</h1>
           </div>
-          <div className="flex-1 p-4  overflow-auto">
+          <div className="flex-1 p-4 mt-14 md:mt-0  overflow-auto">
             {children}
           </div>
         </main>
