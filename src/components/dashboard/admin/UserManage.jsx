@@ -82,7 +82,7 @@ const UserManage = () => {
       
     ]
   return (
-    <div>
+    <div className="min-h-screen">
       <h1 className="text-3xl font-black">Manage User</h1>
       <input type="text" className="p-2 border my-5 rounded-xl" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search anything..." />
       <Table dataSource={userData} columns={columns} pagination={{ pageSize: 15 }} />

@@ -4,14 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../Loading";
 import { Button, Table } from "antd";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { AuthContext } from "../../provider/AuthContext";
+import { Navigate } from "react-router-dom";
 
 
 const Transaction = () => {
   const printRef = useRef();
-
+  const {user} = useContext(AuthContext)
   const axiosPublic = useAxiosPublic()
   const [role, setRole] = useState('')
+
   const {data, isLoading, isError} = useQuery({
     queryKey: 'transaction',
     queryFn: async() => {
@@ -22,6 +25,10 @@ const Transaction = () => {
       return transaction
     }
   })
+
+  if(user.role === "admin") {
+    return <Navigate to={'/dashboard/manage_user'} />
+  }
 
   if(isLoading){
     return <Loading />

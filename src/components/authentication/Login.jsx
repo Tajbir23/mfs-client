@@ -41,13 +41,14 @@ const Login = () => {
         localStorage.setItem("token", data.token)
         setUser(data)
         
-        if(data.role === "admin"){
-          console.log(data)
-          toast.success("Logged in successfully")
-          navigate("/dashboard/manage_transactions")
-        }
+        // if(data.role === "admin"){
+        //   console.log(data)
+        //   toast.success("Logged in successfully")
+        //   navigate("/dashboard/manage_transactions")
+        // }
         navigate("/dashboard")
         toast.success("Logged in successfully")
+        
     }
     } catch (error) {
       console.log(error.response.data.error)

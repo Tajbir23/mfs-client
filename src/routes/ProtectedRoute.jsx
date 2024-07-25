@@ -13,6 +13,8 @@ const ProtectedRoute = ({children}) => {
         return <Loading />
     }
 
+    
+
     if(data?.role && data?.status !== "block" && user){
         return children
     }
