@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }) => {
 
   }
   return (
-    <div className="flex h-screen bg-emerald-100 overflow-hidden ">
+    <div className="flex h-full w-full bg-emerald-100">
       <aside className={`w-64 bg-emerald-300  shadow-md ${isMenuOpen ? 'block fixed top-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
