@@ -50,12 +50,12 @@ const SystemMonitor = () => {
     { name: 'Total Cash Out', value: data?.totalCashOut , type: 'cash_out' },
     { name: 'Total Send Money', value: data?.totalSendMoney , type: 'send_money' },
     { name: 'Total Cash In Request', value: data?.totalCashInRequest , type: 'cash_in_request' },
-    { name: 'Total Cash Out Request', value: data?.totalCashOutRequest, type: 'cash_out_request' },
+    // { name: 'Total Cash Out Request', value: data?.totalCashOutRequest, type: 'cash_out_request' },
     { name: 'Total Cash In Accept', value: data?.totalCashInAccept , type: 'cash_in_accept' },
     { name: 'Total Cash In Reject', value: data?.totalCashInReject , type: 'cash_in_reject' },
-    { name: 'Total Cash Out Reject', value: data?.totalCashOutReject , type: 'cash_out_reject' },
-    { name: 'Total Cash Out Success', value: data?.totalCashOutSuccess , type: 'cash_out_success' },
-    { name: 'Total Send Money Success', value: data?.totalSendMoneySuccess , type: 'send_money_success' },
+    // { name: 'Total Cash Out Reject', value: data?.totalCashOutReject , type: 'cash_out_reject' },
+    // { name: 'Total Cash Out Success', value: data?.totalCashOutSuccess , type: 'cash_out_success' },
+    // { name: 'Total Send Money Success', value: data?.totalSendMoneySuccess , type: 'send_money_success' },
     {name: 'Deducted amount', value: `${data?.totalDeducted} Tk`},
     {name: 'Total Amount', value: `${data?.totalAmount} Tk`}
   ];
