@@ -41,7 +41,6 @@ const SystemMonitor = () => {
   socket.on('system_monitoring_update', async(update) => {
     setData(update)
   })
-  socket.disconnect();
 
   const info = [
     
@@ -62,6 +61,7 @@ const SystemMonitor = () => {
     {name: 'Total Amount', value: `${data?.totalAmount || 0} Tk`}
   ];
 
+  console.log(systemMonitor)
   return (
     <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-10 min-h-screen">
       {info.map((item, index) => {
