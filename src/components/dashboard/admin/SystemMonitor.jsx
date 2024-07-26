@@ -7,8 +7,9 @@ import { useState } from "react";
 
 import io from 'socket.io-client'
 import SystemCard from "./SystemCard";
+import base_url from "../../api";
 // const socket = io('http://localhost:5000')
-const socket = io('https://mfs-server-mu.vercel.app')
+const socket = io(base_url)
 
 
 const getRandomColor = () => {
@@ -40,24 +41,25 @@ const SystemMonitor = () => {
   socket.on('system_monitoring_update', async(update) => {
     setData(update)
   })
+  socket.disconnect();
 
   const info = [
     
-    { name: 'Total Users', value: data?.totalUser , type: 'users' },
-    { name: 'Total Agents', value: data?.totalAgent , type: 'agents' },
-    { name: 'Total Transactions', value: data?.totalTransaction , type: 'transactions' },
-    { name: 'Total Cash In', value: data?.totalCashIn , type: 'cash_in' },
-    { name: 'Total Cash Out', value: data?.totalCashOut , type: 'cash_out' },
-    { name: 'Total Send Money', value: data?.totalSendMoney , type: 'send_money' },
-    { name: 'Total Cash In Request', value: data?.totalCashInRequest , type: 'cash_in_request' },
+    { name: 'Total Users', value: data?.totalUser || 0 , type: 'users' },
+    { name: 'Total Agents', value: data?.totalAgent || 0 , type: 'agents' },
+    { name: 'Total Transactions', value: data?.totalTransaction || 0 , type: 'transactions' },
+    { name: 'Total Cash In', value: data?.totalCashIn || 0 , type: 'cash_in' },
+    { name: 'Total Cash Out', value: data?.totalCashOut || 0 , type: 'cash_out' },
+    { name: 'Total Send Money', value: data?.totalSendMoney || 0 , type: 'send_money' },
+    { name: 'Total Cash In Request', value: data?.totalCashInRequest || 0 , type: 'cash_in_request' },
     // { name: 'Total Cash Out Request', value: data?.totalCashOutRequest, type: 'cash_out_request' },
-    { name: 'Total Cash In Accept', value: data?.totalCashInAccept , type: 'cash_in_accept' },
-    { name: 'Total Cash In Reject', value: data?.totalCashInReject , type: 'cash_in_reject' },
+    { name: 'Total Cash In Accept', value: data?.totalCashInAccept || 0 , type: 'cash_in_accept' },
+    { name: 'Total Cash In Reject', value: data?.totalCashInReject || 0 , type: 'cash_in_reject' },
     // { name: 'Total Cash Out Reject', value: data?.totalCashOutReject , type: 'cash_out_reject' },
     // { name: 'Total Cash Out Success', value: data?.totalCashOutSuccess , type: 'cash_out_success' },
     // { name: 'Total Send Money Success', value: data?.totalSendMoneySuccess , type: 'send_money_success' },
-    {name: 'Deducted amount', value: `${data?.totalDeducted} Tk`},
-    {name: 'Total Amount', value: `${data?.totalAmount} Tk`}
+    {name: 'Deducted amount', value: `${data?.totalDeducted || 0} Tk`},
+    {name: 'Total Amount', value: `${data?.totalAmount || 0} Tk`}
   ];
 
   return (

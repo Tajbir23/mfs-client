@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
+
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
@@ -9,19 +10,20 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
     
-
+    
 
     useEffect(() => {
         const unsubscribe = async()=> {
             try {
                 axiosPublic.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
                 const res = await axiosPublic.get('/auth');
-                console.log(res.data)
-                if(res.data.status === "block"){
+                
+                const data = await res.data
+                if(data.status === "block"){
                     logOut()
                     return
                 }
-                setUser(res.data)
+                setUser(data)
                 setLoading(false)
             } catch (error) {
                 console.log(error)

@@ -2,10 +2,12 @@ import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthContext";
+import base_url from "../components/api";
 
 const axiosSecure = axios.create({
     // baseURL: "http://localhost:5000"
-    baseURL: "https://mfs-server-mu.vercel.app"
+    // baseURL: import.meta.env.BASE_URL
+    baseURL: base_url
 })
 
 const useAxiosSecure = () => {

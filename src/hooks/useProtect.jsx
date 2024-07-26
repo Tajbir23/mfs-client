@@ -11,7 +11,7 @@ const useProtect = () => {
         queryFn: async () => {
             const res = await axiosSecure.get("/auth")
             const data = await res.data
-            console.log(data)
+            // console.log(data)
             if(data?.role){
                 setUser(data)
                 return data

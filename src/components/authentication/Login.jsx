@@ -34,7 +34,9 @@ const Login = () => {
     }
 
     try {
+      // console.log(import.meta.env.BASE_URL)
       const res = await axiosPublic.post("/login", user)
+      
       const data = await res.data
       if(data?.token){
 

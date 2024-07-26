@@ -1,8 +1,10 @@
 import axios from "axios"
+import base_url from "../components/api"
 
 const axiosPublic = axios.create({
     // baseURL: "http://localhost:5000"
-    baseURL: "https://mfs-server-mu.vercel.app"
+    // baseURL: import.meta.env.BASE_URL
+    baseURL: base_url
 })
 
 const useAxiosPublic = () => {
