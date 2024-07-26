@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic"
 import { Table } from "antd"
 import Loading from "../../Loading"
 import DetailsColumns from "./DetailsColumns"
+import { useState } from "react"
 
 
 
@@ -11,12 +12,13 @@ import DetailsColumns from "./DetailsColumns"
 const Details = () => {
     const {id,name} = useParams()
     const axiosPublic = useAxiosPublic()
+    const [currentPage, setCurrentPage] = useState(1)
 
     const {data, isLoading, isError} = useQuery({
-        queryKey: 'detailsType',
+        queryKey: ['detailsType', currentPage],
         queryFn: async() => {
             axiosPublic.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
-            const res = await axiosPublic.get(`/type_details/${id}`)
+            const res = await axiosPublic.get(`/type_details/${id}?currentPage=${currentPage}`)
             const result = await res.data
             return result
         }
@@ -27,12 +29,18 @@ const Details = () => {
     if(isLoading) return <Loading />
     if(isError) return console.log(isError)
 
-    
+    console.log(currentPage)
     
   return (
     <div>
         <h1 className="font-bold mb-5 text-xl">{name}</h1>
-        <Table dataSource={data} columns={DetailsColumns(id)} />
+        <Table dataSource={data.data} columns={DetailsColumns(id)} pagination={
+          {pageSize: 10,
+          current : currentPage,
+          total: data.totalDocuments,
+          onChange : (page) => setCurrentPage(page)  
+          }
+        } />
     </div>
   )
 }

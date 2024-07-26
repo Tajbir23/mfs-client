@@ -61,7 +61,7 @@ const SystemMonitor = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-10 min-h-screen">
+    <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-10 min-h-screen">
       {info.map((item, index) => {
         return <div key={index} className="col-span-1">
         <SystemCard  name={item.name} value={item.value} type={item.type} bgColor={getRandomColor()} />
