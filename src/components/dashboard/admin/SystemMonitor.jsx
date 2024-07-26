@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { TbCoinTakaFilled } from "react-icons/tb";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../Loading";
 
@@ -8,7 +7,8 @@ import { useState } from "react";
 
 import io from 'socket.io-client'
 import SystemCard from "./SystemCard";
-const socket = io('http://localhost:5000')
+// const socket = io('http://localhost:5000')
+const socket = io('https://mfs-server-mu.vercel.app')
 
 
 const getRandomColor = () => {

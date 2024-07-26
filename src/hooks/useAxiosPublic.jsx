@@ -1,7 +1,8 @@
 import axios from "axios"
 
 const axiosPublic = axios.create({
-    baseURL: "http://localhost:5000"
+    // baseURL: "http://localhost:5000"
+    baseURL: "https://mfs-server-mu.vercel.app"
 })
 
 const useAxiosPublic = () => {
