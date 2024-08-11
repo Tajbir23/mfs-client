@@ -35,7 +35,7 @@ INSTAPAY is a basic Mobile Financial Service (MFS) application developed using R
 
 
 ### Technologies Used
-- **Frontend: React.js, Tailwind CSS, DaisyUI**
+- **Frontend: React.js, Tailwind CSS**
 - **Backend: Node.js, Express.js**
 - **Database: MongoDB**
 - **Authentication: JWT, bcrypt.js**
