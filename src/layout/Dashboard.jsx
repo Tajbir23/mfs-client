@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CashIn from '../components/dashboard/TransactionModal/CashIn';
@@ -26,9 +26,16 @@ const DashboardLayout = ({ children }) => {
     setIsOpen(modal)
 
   }
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    });
+  }, [])
   return (
-    <div className="flex h-full w-full bg-emerald-100">
-      <aside className={`w-64 bg-emerald-300  shadow-md ${isMenuOpen ? 'block fixed z-30 pt-14 h-full md:static' : 'hidden'} md:block`}>
+    <div className="flex min-h-screen w-full bg-emerald-100">
+      <aside className={`w-64 bg-emerald-300 shadow-md ${isMenuOpen ? 'block fixed z-30 pt-14 h-full md:static' : 'hidden'} md:block`}>
         <nav className="mt-5">
           <ul>
             <li className="mb-2 md:hidden">
