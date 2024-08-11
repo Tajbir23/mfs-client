@@ -22,6 +22,8 @@ INSTAPAY is a basic Mobile Financial Service (MFS) application developed using R
 - **Transaction History**: View the last 10 transactions with JWT verification.
 
 ### For Agents
+- **Email** : agent@agent.com
+- **Password** : 12345
 - **Registration**: Sign up with Name, 5-digit PIN, Mobile Number, and Email. Status is initially pending and activated by an admin.
 - **Secure Login**: Log in with Mobile Number/Email and PIN. JWT is used for secure login.
 - **Transaction Management**: Approve cash-in and cash-out requests.
@@ -29,6 +31,8 @@ INSTAPAY is a basic Mobile Financial Service (MFS) application developed using R
 - **Transaction History**: View the last 20 transactions with JWT verification.
 
 ### For Admin
+- **Email** : admin@gmail.com
+- **Password** : 12345
 - **Secure Login**: Log in with Mobile Number/Email and PIN. JWT is used for secure login.
 - **User Management**: View and manage all users, activate/block accounts.
 - **System Monitoring**: View all transactions within the system.
