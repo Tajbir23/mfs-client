@@ -1,8 +1,48 @@
-# React + Vite
+# INSTAPAY - Mobile Financial Service Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live URL**: [INSTAPAY](https://mfs-app-4e475.web.app)
 
-Currently, two official plugins are available:
+**Client-Side Code**: [GitHub Repository](https://github.com/Tajbir23/mfs-client.git)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Server-Side Code**: [GitHub Repository](https://github.com/Tajbir23/mfs-server.git)
+
+## Overview
+
+INSTAPAY is a basic Mobile Financial Service (MFS) application developed using React.js, Node.js, Express.js, and MongoDB. This project is inspired by services like bKash and Nagad and includes features for user authentication, money transfers, cash-out, and balance inquiries. The application supports three roles: User, Agent, and Admin.
+
+## Features
+
+### For Users
+- **Registration**: Sign up with Name, 5-digit PIN, Mobile Number, and Email. Status is initially pending and activated by an admin.
+- **Secure Login**: Log in with Mobile Number/Email and PIN. JWT is used for secure login.
+- **Send Money**: Transfer money to other users with PIN and JWT verification.
+- **Cash-Out**: Withdraw funds through agents with PIN and JWT verification.
+- **Cash-In**: Deposit money through agents without a fee.
+- **Balance Inquiry**: Check account balance at any time.
+- **Transaction History**: View the last 10 transactions with JWT verification.
+
+### For Agents
+- **Registration**: Sign up with Name, 5-digit PIN, Mobile Number, and Email. Status is initially pending and activated by an admin.
+- **Secure Login**: Log in with Mobile Number/Email and PIN. JWT is used for secure login.
+- **Transaction Management**: Approve cash-in and cash-out requests.
+- **Balance Inquiry**: Check account balance at any time.
+- **Transaction History**: View the last 20 transactions with JWT verification.
+
+### For Admin
+- **Secure Login**: Log in with Mobile Number/Email and PIN. JWT is used for secure login.
+- **User Management**: View and manage all users, activate/block accounts.
+- **System Monitoring**: View all transactions within the system.
+
+## Installation
+
+<!-- 1. **Clone the repositories:**
+   ```bash
+   git clone https://github.com/Tajbir23/mfs-client.git
+   git clone https://github.com/Tajbir23/mfs-server.git -->
+
+Technologies Used
+Frontend: React.js, Tailwind CSS, DaisyUI
+Backend: Node.js, Express.js
+Database: MongoDB
+Authentication: JWT, bcrypt.js
+Deployment: Firebase
