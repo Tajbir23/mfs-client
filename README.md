@@ -33,16 +33,10 @@ INSTAPAY is a basic Mobile Financial Service (MFS) application developed using R
 - **User Management**: View and manage all users, activate/block accounts.
 - **System Monitoring**: View all transactions within the system.
 
-## Installation
 
-<!-- 1. **Clone the repositories:**
-   ```bash
-   git clone https://github.com/Tajbir23/mfs-client.git
-   git clone https://github.com/Tajbir23/mfs-server.git -->
-
-Technologies Used
-Frontend: React.js, Tailwind CSS, DaisyUI
-Backend: Node.js, Express.js
-Database: MongoDB
-Authentication: JWT, bcrypt.js
-Deployment: Firebase
+### Technologies Used
+- **Frontend: React.js, Tailwind CSS, DaisyUI**
+- **Backend: Node.js, Express.js**
+- **Database: MongoDB**
+- **Authentication: JWT, bcrypt.js**
+- **Deployment: Firebase**
