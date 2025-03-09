@@ -1,16 +1,13 @@
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
   const inputsRef = useRef([]);
-  const [role, setRole] = useState("user")
-
-
-  const navigate = useNavigate()
-
-  const axiosPublic = useAxiosPublic()
+  const [role, setRole] = useState("user");
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const focusNextInput = (e, index) => {
     if (e.target.value.length === 0 && index > 0) {
@@ -23,133 +20,131 @@ const SignUp = () => {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const pin = inputsRef.current.map((input) => input.value).join("");
-    const formData = e.target
-    const name = formData.name.value
-    const email = formData.email.value
-    const phone = formData.phone.value
+    const formData = e.target;
+    const name = formData.name.value;
+    const email = formData.email.value;
+    const phone = formData.phone.value;
 
-    const user =  {
+    const user = {
       name,
       email,
       phone,
       pin,
-      role
-    }
+      role,
+    };
 
-
+    console.log(user);
     try {
-      const res = await axiosPublic.post("/signup", user)
-    const data = await res.data
-    // if(data?.token){
-    //     localStorage.setItem("token", data.token)
-    //     setUser(data)
-    //     toast.success("Account created successfully")
-    //     navigate("/dashboard")
-    // }
-    if(data){
-      toast.success(data?.message)
-      navigate("/login")
-    }
+      const res = await axiosPublic.post("/signup", user);
+      const data = await res.data;
+      if (data) {
+        toast.success(data?.message);
+        navigate("/login");
+      }
     } catch (error) {
-      console.log(error)
-      toast.error(error.response.data.error)
+      console.log(error);
+      toast.error(error.response.data.error);
     }
   };
+
   return (
-    <div className="flex flex-col h-screen justify-center m-auto max-w-md p-6 rounded-md sm:p-10 ">
-      <div className="mb-8 text-center">
-        <h1 className="my-3 text-4xl font-bold">Registration</h1>
-        <p className="text-sm dark:text-gray-600">
-           Register as {role}
+    <div className="flex flex-col h-screen justify-center m-auto max-w-lg p-8 rounded-lg shadow-lg bg-white">
+      <div className="mb-10 text-center">
+        <h1 className="text-5xl font-extrabold text-gray-800">Sign Up</h1>
+        <p className="text-lg text-gray-500 mt-2">
+          Join us as a {role}
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit}
-        noValidate=""
-        action=""
-        className="space-y-12"
-      >
-        <div className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="space-y-6">
           <div>
-            <label htmlFor="name" className="block mb-2 text-sm">
-              Enter your name
+            <label htmlFor="name" className="block mb-1 text-lg font-medium">
+              Name
             </label>
             <input
               type="text"
               name="name"
               id="name"
               required
-              placeholder="Enter your name"
-              className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
+              placeholder="Your full name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm">
-              Email address
+            <label htmlFor="email" className="block mb-1 text-lg font-medium">
+              Email
             </label>
             <input
               type="email"
               name="email"
               id="email"
               required
-              placeholder="leroy@jenkins.com"
-              className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
+              placeholder="you@example.com"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div>
-            <label htmlFor="phone" className="block mb-2 text-sm">
-              Email address
+            <label htmlFor="phone" className="block mb-1 text-lg font-medium">
+              Phone
             </label>
             <input
-              type="number"
+              type="tel"
               name="phone"
               id="phone"
               required
-              placeholder="Enter your phone number"
-              className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
+              placeholder="Your phone number"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div>
-          <p>Enter 5 digit pin</p>
-            <div className="flex mt-2 space-x-2 rtl:space-x-reverse">
+            <p className="text-lg font-medium">Enter 5-digit PIN</p>
+            <div className="flex mt-3 space-x-3">
               {[...Array(5)].map((_, index) => (
                 <div key={index}>
-                  <label
-                    htmlFor={`code-${index + 1}`}
-                    className="sr-only"
-                  >{`Code ${index + 1}`}</label>
                   <input
-                    type="number"
+                    type="text"
                     id={`code-${index + 1}`}
                     maxLength={1}
                     pattern="[0-9]"
                     ref={(el) => (inputsRef.current[index] = el)}
-                    className="block w-9 h-9 py-3 text-sm font-extrabold text-center ring rounded-lg focus:ring-primary-500 focus:border-primary-500 "
+                    className="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
                     onKeyUp={(e) => focusNextInput(e, index)}
                     required
                   />
                 </div>
               ))}
             </div>
-            
           </div>
         </div>
         <div>
-          <div>
-            <button
-              type="submit"
-              className="w-full px-8 py-3 font-semibold rounded-md bg-violet-600 "
-            >
-              Register
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="w-full py-3 text-lg font-semibold text-white bg-violet-600 rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          >
+            Register
+          </button>
         </div>
       </form>
-      {role === "user" && <h1 className="text-blue-600 underline cursor-pointer" onClick={() => setRole('agent')}>Register as agent</h1>}
-      {role === "agent" && <h1 className="text-blue-600 underline cursor-pointer" onClick={() => setRole('user')}>Register as User</h1>}
+      <div className="mt-6 text-center">
+        {role === "user" ? (
+          <p
+            className="text-violet-600 cursor-pointer hover:underline"
+            onClick={() => setRole("agent")}
+          >
+            Register as an agent
+          </p>
+        ) : (
+          <p
+            className="text-violet-600 cursor-pointer hover:underline"
+            onClick={() => setRole("user")}
+          >
+            Register as a user
+          </p>
+        )}
+      </div>
     </div>
   );
 };

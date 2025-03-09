@@ -121,10 +121,12 @@ const Transaction = () => {
   };
 
   return (
-    <div  className="w-full">
-      <h1 className="text-2xl font-bold mb-5">Transaction History</h1>
-      <Table ref={printRef} dataSource={data} columns={columns} pagination={false} />
-      <Button onClick={() => handlePrint()}>Print History</Button>
+    <div className="w-[calc(100vw-65px)] md:w-full p-6 bg-white shadow-md rounded-lg">
+      <div className="flex justify-between items-center mb-5">
+        <h1 className="text-3xl font-semibold text-gray-800">Transaction History</h1>
+        <Button type="primary" onClick={() => handlePrint()}>Print History</Button>
+      </div>
+      <Table ref={printRef} dataSource={data} columns={columns} pagination={false} className="w-full overflow-x-auto" />
     </div>
   )
 }

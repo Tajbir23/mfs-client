@@ -18,9 +18,8 @@ const getRandomColor = () => {
     'bg-purple-600', 'bg-pink-600', 'bg-indigo-600', 'bg-teal-600',
     'bg-gray-600', 'bg-orange-600',
   ];
-  const color = colors[Math.ceil(Math.random() * colors.length)];
-  console.log(color)
-  return color
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  return color;
 };
 
 const SystemMonitor = () => {
