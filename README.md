@@ -1,6 +1,6 @@
 # INSTAPAY - Mobile Financial Service Application
 
-**Live URL**: [INSTAPAY](https://mfs-app-4e475.web.app)
+**Live URL**: [INSTAPAY](http://pro-ft.gl.at.ply.gg:42850)
 
 **Client-Side Code**: [GitHub Repository](https://github.com/Tajbir23/mfs-client.git)
 
